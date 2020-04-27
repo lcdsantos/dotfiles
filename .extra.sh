@@ -1,4 +1,4 @@
-alias ll='ls -la --color=always '
+alias ll='ls -la --color=always'
 alias la='ls -A'
 alias l='ls -CF'
 alias gl='git log --oneline --all --graph --decorate'
@@ -19,6 +19,16 @@ alias dev='npm run dev'
 alias cat='bat'
 alias kill5000='fuser -k -n tcp 5000'
 alias x='code ~/.extra'
+alias cert='aws acm describe-certificate --certificate-arn'
+alias certwait='aws acm wait certificate-validated --certificate-arn'
+
+c () {
+	cert "$@" | jq '.Certificate.DomainValidationOptions'
+}
+
+c2 () {
+	certwait "$@" && paplay /usr/share/sounds/ubuntu/notifications/Positive.ogg
+}
 
 GIT_AUTHOR_NAME="Leonardo Santos"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
